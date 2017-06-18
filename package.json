@@ -1,0 +1,26 @@
+{
+  "name": "stream-read-all",
+  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "version": "0.0.0",
+  "description": "stream-read-all",
+  "repository": "https://github.com/75lb/stream-read-all.git",
+  "keywords": [
+    "concat",
+    "stream",
+    "read",
+    "all",
+    "collect",
+    "buffers",
+    "concatenate"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "test-runner test/*.js"
+  },
+  "dependencies": {
+    "test-runner": "^0.4.0"
+  }
+}
