@@ -9,9 +9,12 @@ module.exports = streamReadAll
 class StreamReader extends Transform {
   constructor (options) {
     super(options)
-    options = options || {}
-    this.options = options
-    this.buf = options.objectMode ? [] : Buffer.alloc(0)
+    this.options = options || {}
+    if (this.options.objectMode) {
+      this.buf = []
+    } else {
+      this.buf = Buffer.alloc ? Buffer.alloc(0) : new Buffer(0)
+    }
   }
 
   _transform (chunk, enc, done) {
