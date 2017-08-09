@@ -21,10 +21,9 @@
     "test": "test-runner test/*.js",
     "cover": "istanbul cover ./node_modules/.bin/test-runner test/*.js && cat coverage/lcov.info | ./node_modules/.bin/coveralls && echo"
   },
-  "dependencies": {
-    "test-runner": "^0.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "coveralls": "^2.13.1"
+    "coveralls": "^2.13.1",
+    "test-runner": "^0.4.0"
   }
 }
