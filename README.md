@@ -7,13 +7,26 @@
 
 # stream-read-all
 
-Returns a promise which resolves once all data has been read.
+Returns a promise which resolves once all data in the supplied stream has been read.
+
+This example script...
 
 ```js
-const stream = fs.createReadStream('./package.json')
-const data = await streamReadAll(stream)
+async function printInput () {
+  const streamReadAll = require('stream-read-all')
+  const stdin = await streamReadAll(process.stdin)
+  console.log(stdin.toString())
+}
+printInput()
+```
+
+...prints this output.
+
+```
+$ echo Hello | node example.js
+Hello
 ```
 
 * * *
 
-&copy; 2017 Lloyd Brookes <75pound@gmail.com>.
+&copy; 2017-18 Lloyd Brookes <75pound@gmail.com>.
