@@ -21,6 +21,9 @@
     "test": "test-runner test/*.js",
     "cover": "nyc --reporter=text-lcov npm test | coveralls"
   },
+  "files": [
+    "index.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "coveralls": "^3.0.1",
