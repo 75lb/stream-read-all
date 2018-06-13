@@ -47,8 +47,6 @@ function streamReadAll (stream, options) {
     streamReader.on('end', () => {
       resolve(streamReader.buf)
     })
-    streamReader.on('error', (err) => {
-      reject(err)
-    })
+    streamReader.on('error', reject)
   })
 }
