@@ -1,7 +1,7 @@
 {
   "name": "stream-read-all",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Returns a promise which resolves once all data in the supplied stream has been read",
   "repository": "https://github.com/75lb/stream-read-all.git",
   "keywords": [
