@@ -1,10 +1,8 @@
-'use strict'
 const Transform = require('stream').Transform
 
 /**
  * @module stream-read-all
  */
-module.exports = streamReadAll
 
 class StreamReader extends Transform {
   constructor (options) {
@@ -50,3 +48,5 @@ function streamReadAll (stream, options) {
     streamReader.on('error', reject)
   })
 }
+
+module.exports = streamReadAll

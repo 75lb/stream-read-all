@@ -1,11 +1,11 @@
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const a = require('assert')
-const streamReadAll = require('../')
+const streamReadAll = require('./')
 const fs = require('fs')
 
-const runner = new TestRunner()
+const tom = module.exports = new Tom('simple')
 
-runner.test('buffer mode', function () {
+tom.test('buffer mode', function () {
   const stream = fs.createReadStream('./package.json')
   return streamReadAll(stream)
     .then(result => {
@@ -13,7 +13,7 @@ runner.test('buffer mode', function () {
     })
 })
 
-runner.test('object mode', function () {
+tom.test('object mode', function () {
   const PassThrough = require('stream').PassThrough
   const stream = new PassThrough({ objectMode: true })
   process.nextTick(() => {
