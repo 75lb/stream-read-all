@@ -2,8 +2,13 @@
   "name": "stream-read-all",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "3.0.1",
-  "description": "Returns a promise which resolves once all data in the supplied stream has been read",
-  "repository": "https://github.com/75lb/stream-read-all.git",
+  "description": "Returns a promise which fulfils with all data from the supplied stream",
+  "repository": "https://github.com/75lb/stream-read-all",
+  "type": "module",
+  "exports": {
+    "import": "./index.js",
+    "require": "./dist/index.cjs"
+  },
   "keywords": [
     "concat",
     "stream",
@@ -15,18 +20,26 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.20"
   },
   "scripts": {
-    "test": "test-runner test.js",
-    "cover": "nyc --reporter=text-lcov npm test | coveralls"
+    "test": "npm run dist && npm run test:ci",
+    "test:ci": "test-runner test.js",
+    "dist": "rollup -c"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "dist"
   ],
-  "dependencies": {},
+  "standard": {
+    "ignore": [
+      "tmp",
+      "dist"
+    ],
+    "envs": []
+  },
   "devDependencies": {
-    "coveralls": "^3.1.0",
-    "test-runner": "^0.8.13"
+    "rollup": "^3.19.1",
+    "test-runner": "^0.10.1"
   }
 }

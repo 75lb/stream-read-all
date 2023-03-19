@@ -1,4 +1,4 @@
-const Transform = require('stream').Transform
+import { Transform } from 'node:stream'
 
 /**
  * @module stream-read-all
@@ -49,4 +49,4 @@ function streamReadAll (stream, options) {
   })
 }
 
-module.exports = streamReadAll
+export default streamReadAll

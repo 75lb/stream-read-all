@@ -1,27 +1,27 @@
-const Tom = require('test-runner').Tom
-const a = require('assert')
-const streamReadAll = require('./')
-const fs = require('fs')
+import TestRunner from 'test-runner'
+import { strict as a } from 'assert'
+import streamReadAll from 'stream-read-all'
+import fs from 'node:fs'
+import { PassThrough } from 'node:stream'
 
-const tom = module.exports = new Tom('simple')
+const tom = new TestRunner.Tom()
 
-tom.test('buffer mode', function () {
+tom.test('buffer mode', async function () {
   const stream = fs.createReadStream('./package.json')
-  return streamReadAll(stream)
-    .then(result => {
-      a.ok(JSON.parse(result))
-    })
+  const result = await streamReadAll(stream)
+  a.ok(JSON.parse(result))
 })
 
-tom.test('object mode', function () {
-  const PassThrough = require('stream').PassThrough
+tom.test('object mode', async function () {
   const stream = new PassThrough({ objectMode: true })
   process.nextTick(() => {
     stream.write({})
     stream.end({})
   })
-  return streamReadAll(stream, { objectMode: true })
-    .then(result => {
-      a.strictEqual(result.length, 2)
-    })
+  const result = await streamReadAll(stream, { objectMode: true })
+    a.strictEqual(result.length, 2)
 })
+
+export default tom
+
+
