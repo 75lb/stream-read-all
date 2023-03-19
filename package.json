@@ -2,7 +2,7 @@
   "name": "stream-read-all",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "3.0.1",
-  "description": "Returns a promise which fulfils with all data from the supplied stream",
+  "description": "Returns a promise which fulfils with the supplied stream's content",
   "repository": "https://github.com/75lb/stream-read-all",
   "type": "module",
   "exports": {

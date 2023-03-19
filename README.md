@@ -7,7 +7,7 @@
 
 # stream-read-all
 
-Returns a promise which resolves once all data in the supplied stream has been read.
+Returns a promise which fulfils with the supplied stream's content. Supports both regular and [object mode](https://nodejs.org/dist/latest-v19.x/docs/api/stream.html#object-mode) streams.
 
 This example script...
 
