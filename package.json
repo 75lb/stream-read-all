@@ -3,7 +3,10 @@
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "4.0.0",
   "description": "Returns a promise which fulfils with the supplied stream's content",
-  "repository": "https://github.com/75lb/stream-read-all",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/75lb/stream-read-all.git"
+  },
   "type": "module",
   "exports": {
     "import": "./index.js",
