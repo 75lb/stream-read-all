@@ -1,7 +1,7 @@
 {
   "name": "stream-read-all",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Returns a promise which fulfils with the supplied stream's content",
   "repository": {
     "type": "git",
