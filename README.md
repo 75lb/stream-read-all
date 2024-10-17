@@ -24,7 +24,7 @@ $ echo Hello | node example.js
 Hello
 ```
 
-The above `streamReadAll` function returns either a `Buffer` in regular mode or an array of objects in object mode. Alternatively, you can use `streamReadText` which is identical to the above except it returns text. The second argument is optional, specifying the character encoding to use (as in the [buffer.toString()](https://nodejs.org/docs/latest/api/buffer.html#buftostringencoding-start-end) first argument).
+The above `streamReadAll` function returns either a `Buffer` in regular mode or an array of objects in object mode. Alternatively, you can use `streamReadText` which is identical to the above except it returns text. The second argument is optional, specifying the character encoding to use (as in the [buffer.toString()](https://nodejs.org/docs/latest/api/buffer.html#buftostringencoding-start-end) first argument). The default value is 'utf8'.
 
 ```js
 import { streamReadText } from 'stream-read-all'
