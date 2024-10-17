@@ -7,14 +7,14 @@
 
 # stream-read-all
 
-Returns a promise which fulfils with the supplied stream's content. Supports both regular and [object mode](https://nodejs.org/dist/latest-v19.x/docs/api/stream.html#object-mode) streams.
+Returns a promise which fulfils with the supplied stream's content. Supports any [Readable](https://nodejs.org/docs/latest/api/stream.html#readable-streams) stream as input in either regular or [object mode](https://nodejs.org/docs/latest/api/stream.html#object-mode).
 
-This example script...
+For example, this script...
 
 ```js
-import streamReadAll from 'stream-read-all'
-const stdin = await streamReadAll(process.stdin)
-console.log(stdin.toString())
+import { streamReadAll } from 'stream-read-all'
+const readable = await streamReadAll(process.stdin)
+console.log(readable.toString())
 ```
 
 ...prints this output.
@@ -22,6 +22,16 @@ console.log(stdin.toString())
 ```
 $ echo Hello | node example.js
 Hello
+```
+
+The above `streamReadAll` function returns either a `Buffer` in regular mode or an array of objects in object mode. Alternatively, you can use `streamReadText` which is identical to the above except it guarantees text back. The second argument is optional, specifying the character encoding to use (as in the [buffer.toString()](https://nodejs.org/docs/latest/api/buffer.html#buftostringencoding-start-end) first argument)
+
+```js
+import { streamReadText } from 'stream-read-all'
+const readable = fs.createReadStream('./package.json')
+const text = await streamReadText(readable, 'hex')
+console.log(text)
+// prints the package.json file content in hex format
 ```
 
 * * *
