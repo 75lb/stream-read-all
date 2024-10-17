@@ -26,4 +26,4 @@ Hello
 
 * * *
 
-&copy; 2017-23 Lloyd Brookes <75pound@gmail.com>.
+&copy; 2017-25 Lloyd Brookes <opensource@75lb.com>.

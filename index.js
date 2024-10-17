@@ -1,52 +1,33 @@
-import { Transform } from 'node:stream'
-
 /**
- * @module stream-read-all
+ * [options.objectMode]{boolean}
  */
-
-class StreamReader extends Transform {
-  constructor (options) {
-    super(options)
-    this.options = options || {}
-    if (this.options.objectMode) {
-      this.buf = []
-    } else {
-      this.buf = Buffer.alloc ? Buffer.alloc(0) : new Buffer(0)
-    }
+async function streamReadAll (stream, options = {}) {
+  if (!(stream && stream.pipe)) {
+    throw new Error('Please supply a Readable stream as input')
   }
-
-  _transform (chunk, enc, done) {
-    if (chunk) {
-      if (this.options.objectMode) {
-        this.buf.push(chunk)
-      } else {
-        this.buf = Buffer.concat([ this.buf, chunk ])
-      }
-    }
-    done()
-  }
-
-  _flush (done) {
-    this.push(this.buf)
-    this.push(null)
-    done()
-  }
-}
-
-/**
- * @return {Promise}
- * @alias module:stream-read-all
- */
-function streamReadAll (stream, options) {
-  const streamReader = new StreamReader(options)
-  stream.pipe(streamReader)
   return new Promise((resolve, reject) => {
-    streamReader.resume()
-    streamReader.on('end', () => {
-      resolve(streamReader.buf)
+    const buf = []
+    stream.on('data', chunk => {
+      buf.push(chunk)
     })
-    streamReader.on('error', reject)
+
+    /* End not guaranteed to emit, resolve on close */
+    stream.on('close', () => {
+      if (options.objectMode) {
+        resolve(buf)
+      } else {
+        resolve(Buffer.concat(buf))
+      }
+    })
+    stream.on('error', err => {
+      reject(err)
+    })
   })
 }
 
-export default streamReadAll
+async function streamReadText (stream, encoding = 'utf8') {
+  const result = await streamReadAll(stream)
+  return result.toString(encoding)
+}
+
+export { streamReadAll, streamReadText }
