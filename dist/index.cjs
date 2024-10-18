@@ -1,24 +1,28 @@
 'use strict';
 
 /**
- * [options.objectMode]{boolean}
  */
-async function streamReadAll (stream, options = {}) {
+async function streamReadAll (stream) {
   if (!(stream && stream.pipe)) {
     throw new Error('Please supply a Readable stream as input')
   }
   return new Promise((resolve, reject) => {
-    let buf = [];
+    const chunks = [];
     stream.on('data', chunk => {
-      buf.push(chunk);
+      chunks.push(chunk);
     });
 
     /* End not guaranteed to emit, resolve on close */
     stream.on('close', () => {
-      if (options.objectMode) {
-        resolve(buf);
+      if (stream.readableObjectMode) {
+        resolve(chunks);
       } else {
-        resolve(Buffer.concat(buf));
+        /* If any encoding is set, the chunks received will be strings. https://nodejs.org/docs/latest/api/stream.html#readablesetencodingencoding */
+        if (stream.readableEncoding) {
+          resolve(chunks.join(''));
+        } else {
+          resolve(Buffer.concat(chunks));
+        }
       }
     });
     stream.on('error', err => {
@@ -29,7 +33,11 @@ async function streamReadAll (stream, options = {}) {
 
 async function streamReadText (stream, encoding = 'utf8') {
   const result = await streamReadAll(stream);
-  return result.toString(encoding)
+  if (stream.readableObjectMode) {
+    return result.join('').toString(encoding)
+  } else {
+    return result.toString(encoding)
+  }
 }
 
 exports.streamReadAll = streamReadAll;
