@@ -1,6 +1,6 @@
 import { streamReadAll, streamReadText } from 'stream-read-all'
-import fs from 'node:fs'
-import { PassThrough, Readable } from 'node:stream'
+import fs from 'fs'
+import { PassThrough, Readable } from 'stream'
 import { strict as a } from 'assert'
 
 const [test, only, skip] = [new Map(), new Map(), new Map()]
